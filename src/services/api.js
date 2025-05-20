@@ -1,7 +1,7 @@
 // API Configuration
 // const API_BASE_URL = "http://localhost/shehena.co.ke/www/endpoints";
 // const API_BASE_URL = "https://admin.shehena.co.ke/endpoints";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 // API Endpoints
 const ENDPOINTS = {
