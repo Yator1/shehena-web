@@ -2,8 +2,7 @@
 
 // Get API base from environment
 const API_BASE_URL = import.meta.env.VITE_API_URL;
-const IMAGE_BASE_URL =
-  import.meta.env.VITE_IMAGE_URL || `${API_BASE_URL}/../uploads/images`;
+const IMAGE_BASE_URL = import.meta.env.VITE_IMAGE_URL || `${API_BASE_URL}/../uploads/images`;
 
 const fallbackImage = "https://via.placeholder.com/600x400?text=No+Image";
 

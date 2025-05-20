@@ -1,4 +1,7 @@
-const API_BASE_URL = window.location.hostname === "localhost" ? "http://localhost/shehena.co.ke/www/endpoints" : "https://admin.shehena.co.ke/endpoints";
+// API Configuration
+const API_BASE_URL = "http://localhost/shehena.co.ke/www/endpoints";
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 // API Endpoints
 const ENDPOINTS = {
   AUTH: {

@@ -134,7 +134,7 @@ const LoginForm = ({ onSwitch }) => {
         </p>
       </div>
       
-      <div className="text-center mt-4">
+      {/* <div className="text-center mt-4">
         <p className="text-sm text-gray-400">
           Test Credentials:
         </p>
@@ -142,7 +142,7 @@ const LoginForm = ({ onSwitch }) => {
           <p>admin@shehena.com / admin123</p>
           <p>user@shehena.com / user123</p>
         </div>
-      </div>
+      </div> */}
     </motion.form>
   )
 }
