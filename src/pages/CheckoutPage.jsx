@@ -90,7 +90,7 @@ const CheckoutPage = () => {
       };
 
       const res = await fetch(
-        "http://localhost/shehena.co.ke/www/endpoints/api_create_order.php",
+        "https://admin.shehena.co.ke/endpoints/api_create_order.php",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
