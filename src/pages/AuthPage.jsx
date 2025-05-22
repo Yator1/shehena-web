@@ -27,7 +27,7 @@ const AuthPage = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md px-6 py-8 bg-dark-700 rounded-xl shadow-xl glass-card mx-4"
+        className="w-full max-w-xl px-6 py-8 bg-dark-700 rounded-xl shadow-xl glass-card mx-4"
       >
         <div className="text-center mb-8">
           <h1 className="text-3xl font-display font-bold text-white mb-2">

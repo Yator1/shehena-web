@@ -9,6 +9,7 @@ import {
   FiEyeOff,
   FiPhone,
   FiMapPin,
+  FiBriefcase,
 } from "react-icons/fi";
 import LoadingSpinner from "../ui/LoadingSpinner";
 
@@ -22,6 +23,7 @@ const RegisterForm = ({ onSwitch }) => {
     user_phone: "",
     county: "",
     sub_county: "",
+    bar_name: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const { register, loading } = useAuth();
@@ -46,7 +48,7 @@ const RegisterForm = ({ onSwitch }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
       onSubmit={handleSubmit}
-      className="space-y-4"
+      className="space-y-2"
     >
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -143,6 +145,29 @@ const RegisterForm = ({ onSwitch }) => {
             onChange={handleChange}
             className="input block w-full pl-10 pr-3 py-2"
             placeholder="0712345678"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label
+          htmlFor="user_phone"
+          className="block text-sm font-medium text-gray-300 mb-1"
+        >
+          Business Name
+        </label>
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <FiBriefcase className="h-5 w-5 text-gray-400" />
+          </div>
+          <input
+            id="user_phone"
+            name="user_phone"
+            type="tel"
+            required
+            value={formData.bar_name}
+            onChange={handleChange}
+            className="input block w-full pl-10 pr-3 py-2"
           />
         </div>
       </div>

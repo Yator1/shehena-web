@@ -133,16 +133,6 @@ const LoginForm = ({ onSwitch }) => {
           </button>
         </p>
       </div>
-      
-      {/* <div className="text-center mt-4">
-        <p className="text-sm text-gray-400">
-          Test Credentials:
-        </p>
-        <div className="mt-2 text-xs text-accent-400">
-          <p>admin@shehena.com / admin123</p>
-          <p>user@shehena.com / user123</p>
-        </div>
-      </div> */}
     </motion.form>
   )
 }
