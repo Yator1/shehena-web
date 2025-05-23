@@ -48,8 +48,8 @@ const CheckoutPage = () => {
   };
 
   // Calculate totals
-  const shippingCost = 250;
-  const taxAmount = Math.round(totalAmount * 0.16);
+  // const shippingCost = 250;
+  // const taxAmount = Math.round(totalAmount * 0.16);
   const orderTotal = totalAmount + shippingCost + taxAmount;
 
   const handleSubmit = async (e) => {
@@ -516,17 +516,17 @@ const CheckoutPage = () => {
 
             <div className="border-t border-dark-600 pt-4 space-y-3">
               <div className="flex justify-between">
-                <span className="text-gray-300">Subtotal</span>
+                <span className="text-gray-300">Subtotal(tax inclusive)</span>
                 <span className="text-white">KES {totalAmount}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-300">Shipping</span>
                 <span className="text-white">KES {shippingCost}</span>
               </div>
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <span className="text-gray-300">Tax (16%)</span>
                 <span className="text-white">KES {taxAmount}</span>
-              </div>
+              </div> */}
             </div>
 
             <div className="border-t border-dark-600 mt-4 pt-4 flex justify-between items-center">
