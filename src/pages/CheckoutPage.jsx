@@ -81,9 +81,9 @@ const CheckoutPage = () => {
         })),
         payment: {
           method: paymentMethod,
-          status: paymentMethod === "cash" ? "pending" : "processing",
+          status: paymentMethod === "cash" ? "pending" : "pending",
           phone_number: formData.mpesaPhone || formData.phone || "0712345678",
-          ref_id: paymentMethod === "cash" ? "CASH-ORDER" : "WEB-ORDER",
+          ref_id: paymentMethod === "cash" ? "CASH-ORDER" : "",
           date: null,
           amount: orderTotal.toString(),
         },
