@@ -264,7 +264,7 @@ const CheckoutPage = () => {
               </h2>
 
               <div className="flex flex-wrap gap-4 mb-6">
-                {/* <button
+                <button
                   type="button"
                   onClick={() => setPaymentMethod("mpesa")}
                   className={`flex items-center p-4 rounded-lg border ${
@@ -287,7 +287,7 @@ const CheckoutPage = () => {
                   >
                     M-Pesa
                   </span>
-                </button> */}
+                </button>
 
                 {/* <button
                   type="button"
