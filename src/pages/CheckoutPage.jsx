@@ -50,7 +50,7 @@ const CheckoutPage = () => {
   // Calculate totals
   // const shippingCost = 250;
   // const taxAmount = Math.round(totalAmount * 0.16);
-  const orderTotal = totalAmount + shippingCost + taxAmount;
+  const orderTotal = totalAmount;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -519,10 +519,10 @@ const CheckoutPage = () => {
                 <span className="text-gray-300">Subtotal(tax inclusive)</span>
                 <span className="text-white">KES {totalAmount}</span>
               </div>
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <span className="text-gray-300">Shipping</span>
                 <span className="text-white">KES {shippingCost}</span>
-              </div>
+              </div> */}
               {/* <div className="flex justify-between">
                 <span className="text-gray-300">Tax (16%)</span>
                 <span className="text-white">KES {taxAmount}</span>
