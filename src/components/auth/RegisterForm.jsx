@@ -151,7 +151,7 @@ const RegisterForm = ({ onSwitch }) => {
 
       <div>
         <label
-          htmlFor="user_phone"
+          htmlFor="bar_name"
           className="block text-sm font-medium text-gray-300 mb-1"
         >
           Business Name
@@ -161,13 +161,14 @@ const RegisterForm = ({ onSwitch }) => {
             <FiBriefcase className="h-5 w-5 text-gray-400" />
           </div>
           <input
-            id="user_phone"
-            name="user_phone"
-            type="tel"
+            id="bar_name"
+            name="bar_name"
+            type="text"
             required
             value={formData.bar_name}
             onChange={handleChange}
             className="input block w-full pl-10 pr-3 py-2"
+            placeholder="Bar or Business Name"
           />
         </div>
       </div>

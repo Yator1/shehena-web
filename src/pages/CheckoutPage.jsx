@@ -516,7 +516,7 @@ const CheckoutPage = () => {
 
             <div className="border-t border-dark-600 pt-4 space-y-3">
               <div className="flex justify-between">
-                <span className="text-gray-300">Subtotal(tax inclusive)</span>
+                <span className="text-gray-300">Total(tax inclusive)</span>
                 <span className="text-white">KES {totalAmount}</span>
               </div>
               {/* <div className="flex justify-between">
