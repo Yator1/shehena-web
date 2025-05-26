@@ -64,7 +64,7 @@ const ProductDetailPage = () => {
     };
 
     if (isInCart) {
-      updateQuantity(product.id, cartItem.quantity + quantity);
+      updateQuantity(product.variation_id, cartItem.quantity + quantity);
     } else {
       addToCart(enrichedProduct, quantity);
     }
