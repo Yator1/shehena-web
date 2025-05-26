@@ -54,7 +54,7 @@ const CartPage = () => {
           <div className="bg-dark-700 rounded-lg md:rounded-t-none overflow-hidden divide-y divide-dark-600">
             {cartItems.map(item => (
               <motion.div
-                key={item.id}
+                key={item.variation_id}
                 layout
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -91,7 +91,7 @@ const CartPage = () => {
                 <div className="md:col-span-2 flex justify-center mb-3 md:mb-0">
                   <div className="flex items-center rounded-md bg-dark-600 p-1">
                     <button
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      onClick={() => updateQuantity(item.variation_id, item.quantity - 1)}
                       className="p-1 text-gray-300 hover:text-accent-400 transition-colors"
                       aria-label="Decrease quantity"
                     >
@@ -101,7 +101,7 @@ const CartPage = () => {
                       {item.quantity}
                     </span>
                     <button
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      onClick={() => updateQuantity(item.variation_id, item.quantity + 1)}
                       className="p-1 text-gray-300 hover:text-accent-400 transition-colors"
                       aria-label="Increase quantity"
                     >
@@ -116,7 +116,7 @@ const CartPage = () => {
                     KES {item.price * item.quantity}
                   </span>
                   <button
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => removeFromCart(item.variation_id)}
                     className="text-gray-400 hover:text-error transition-colors"
                     aria-label="Remove item"
                   >
@@ -132,7 +132,7 @@ const CartPage = () => {
                       KES {item.price * item.quantity}
                     </span>
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCart(item.variation_id)}
                       className="text-gray-400 hover:text-error transition-colors"
                       aria-label="Remove item"
                     >
