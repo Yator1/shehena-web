@@ -47,6 +47,8 @@ export const productService = {
 
         return {
           id: product.product_id,
+          product_id: firstVariant?.product_id || product.product_id,
+          variation_id: firstVariant?.variant_id || null,
           name: product.product_name,
           category: data.data.category_info.category_id,
           description: product.product_description || "",
