@@ -48,9 +48,9 @@ const CheckoutPage = () => {
   };
 
   // Calculate totals
-  // const shippingCost = 250;
+  const shippingCost = 250;
   // const taxAmount = Math.round(totalAmount * 0.16);
-  const orderTotal = totalAmount;
+  const orderTotal = totalAmount + shippingCost;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
