@@ -12,6 +12,7 @@ import { useCart } from "../contexts/CartContext";
 import { paymentService } from "../services/paymentService";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import { useAuth } from "../contexts/AuthContext";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const CheckoutPage = () => {
   const { cartItems, totalAmount, clearCart } = useCart();
@@ -89,14 +90,11 @@ const CheckoutPage = () => {
         },
       };
 
-      const res = await fetch(
-        "https://admin.shehena.co.ke/endpoints/api_create_order.php",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
+      const res = await fetch(`${API_BASE_URL}/api_create_order.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
       const data = await res.json();
 

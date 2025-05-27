@@ -3,13 +3,16 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '../../contexts/AuthContext'
 import { useCart } from '../../contexts/CartContext'
-import { FiShoppingCart, FiUser, FiMenu, FiX, FiSearch, FiHome, FiGrid } from 'react-icons/fi'
+import { FiShoppingCart, FiUser, FiMenu, FiX, FiHome, FiGrid, FiShoppingBag } from 'react-icons/fi'
+
+const API_BASE_URL = import.meta.env.VITE_API_URL
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  // const [isSearchOpen, setIsSearchOpen] = useState(false)
+  // const [searchQuery, setSearchQuery] = useState('')
   const [isScrolled, setIsScrolled] = useState(false)
+  const [categories, setCategories] = useState([])
   const { user, logout } = useAuth()
   const { totalItems } = useCart()
   const location = useLocation()
@@ -27,12 +30,45 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   
-  const handleSearchSubmit = (e) => {
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api_categories.php`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        })
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+
+        const data = await response.json()
+        if (data.status) {
+          const formattedCategories = data.data.map(category => ({
+            id: category.category_id,
+            name: category.category_name,
+            slug: category.category_name.toLowerCase().replace(/\s+/g, '-')
+          }))
+          setCategories(formattedCategories)
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error)
+        setCategories([])
+      }
+    }
+
+    fetchCategories()
+  }, [])
+  
+  /* const handleSearchSubmit = (e) => {
     e.preventDefault()
     console.log('Searching for:', searchQuery)
     setIsSearchOpen(false)
     setSearchQuery('')
-  }
+  } */
   
   return (
     <header 
@@ -66,61 +102,69 @@ const Navbar = () => {
               
               <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div className="py-2">
-                  <NavLink 
-                    to="/category/beer" 
-                    className={({ isActive }) => 
-                      `block px-4 py-2 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600 hover:text-accent-400'}`
-                    }
-                  >
-                    Beer
-                  </NavLink>
-                  <NavLink 
-                    to="/category/wine" 
-                    className={({ isActive }) => 
-                      `block px-4 py-2 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600 hover:text-accent-400'}`
-                    }
-                  >
-                    Wine
-                  </NavLink>
-                  <NavLink 
-                    to="/category/whiskey" 
-                    className={({ isActive }) => 
-                      `block px-4 py-2 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600 hover:text-accent-400'}`
-                    }
-                  >
-                    Whiskey
-                  </NavLink>
-                  <NavLink 
-                    to="/category/vodka" 
-                    className={({ isActive }) => 
-                      `block px-4 py-2 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600 hover:text-accent-400'}`
-                    }
-                  >
-                    Vodka
-                  </NavLink>
-                  <NavLink 
-                    to="/category/gin" 
-                    className={({ isActive }) => 
-                      `block px-4 py-2 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600 hover:text-accent-400'}`
-                    }
-                  >
-                    Gin
-                  </NavLink>
+                  {categories.map((category) => (
+                    <NavLink 
+                      key={category.id}
+                      to={`/category/${category.slug}`} 
+                      className={({ isActive }) => 
+                        `block px-4 py-2 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600 hover:text-accent-400'}`
+                      }
+                    >
+                      {category.name}
+                    </NavLink>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
           
           <div className="flex items-center space-x-4">
-            <button 
-              onClick={() => setIsSearchOpen(true)}
-              className="text-gray-600 hover:text-accent-400 transition-colors"
-            >
-              <FiSearch className="h-5 w-5" />
-            </button>
+            {/* Search button and form removed temporarily
+            <div className="flex items-center relative">
+              <AnimatePresence>
+                {isSearchOpen && (
+                  <motion.div
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{ width: 300, opacity: 1 }}
+                    exit={{ width: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 pr-10"
+                  >
+                    <form onSubmit={handleSearchSubmit} className="relative">
+                      <input
+                        type="text"
+                        placeholder="Search for drinks..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full bg-white border border-cream-200 rounded-lg py-2 px-4 text-sm text-gray-800 focus:ring-accent-500 focus:border-accent-500"
+                        autoFocus
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setIsSearchOpen(false)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      >
+                        <FiX className="h-4 w-4" />
+                      </button>
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <button 
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                className="text-gray-600 hover:text-accent-400 transition-colors z-10"
+              >
+                <FiSearch className="h-5 w-5" />
+              </button>
+            </div>
+            */}
             
             <Link to="/profile" className="text-gray-600 hover:text-accent-400 transition-colors">
               <FiUser className="h-5 w-5" />
+            </Link>
+            
+            <Link to="/orders" className="text-gray-600 hover:text-accent-400 transition-colors">
+              <FiShoppingBag className="h-5 w-5" />
             </Link>
             
             <Link to="/cart" className="relative text-gray-600 hover:text-accent-400 transition-colors">
@@ -173,46 +217,17 @@ const Navbar = () => {
                   <span>Categories</span>
                 </div>
                 <div className="pl-6 space-y-2">
-                  <NavLink 
-                    to="/category/beer" 
-                    className={({ isActive }) => 
-                      `block py-1 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600'}`
-                    }
-                  >
-                    Beer
-                  </NavLink>
-                  <NavLink 
-                    to="/category/wine" 
-                    className={({ isActive }) => 
-                      `block py-1 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600'}`
-                    }
-                  >
-                    Wine
-                  </NavLink>
-                  <NavLink 
-                    to="/category/whiskey" 
-                    className={({ isActive }) => 
-                      `block py-1 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600'}`
-                    }
-                  >
-                    Whiskey
-                  </NavLink>
-                  <NavLink 
-                    to="/category/vodka" 
-                    className={({ isActive }) => 
-                      `block py-1 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600'}`
-                    }
-                  >
-                    Vodka
-                  </NavLink>
-                  <NavLink 
-                    to="/category/gin" 
-                    className={({ isActive }) => 
-                      `block py-1 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600'}`
-                    }
-                  >
-                    Gin
-                  </NavLink>
+                  {categories.map((category) => (
+                    <NavLink 
+                      key={category.id}
+                      to={`/category/${category.slug}`} 
+                      className={({ isActive }) => 
+                        `block py-1 text-sm ${isActive ? 'text-accent-400' : 'text-gray-600'}`
+                      }
+                    >
+                      {category.name}
+                    </NavLink>
+                  ))}
                 </div>
               </div>
               
@@ -229,6 +244,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
       
+      {/* Fullscreen search modal removed temporarily
       <AnimatePresence>
         {isSearchOpen && (
           <motion.div
@@ -264,6 +280,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      */}
     </header>
   )
 }

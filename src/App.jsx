@@ -3,6 +3,7 @@ import { useAuth } from './contexts/AuthContext'
 import { lazy, Suspense } from 'react'
 import Layout from './components/layout/Layout'
 import LoadingSpinner from './components/ui/LoadingSpinner'
+import OrdersPage from './pages/OrdersPage'
 
 // Lazy-loaded pages
 const AuthPage = lazy(() => import('./pages/AuthPage'))
@@ -45,6 +46,7 @@ function App() {
           <Route path="product/:productId" element={<ProductDetailPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="orders" element={<OrdersPage />} />
           <Route path="profile" element={<ProfilePage />} />
         </Route>
         
