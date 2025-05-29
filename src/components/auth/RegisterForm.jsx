@@ -22,7 +22,7 @@ const RegisterForm = ({ onSwitch }) => {
     confirmPassword: "",
     user_phone: "",
     county: "",
-    sub_county: "",
+    location: "",
     bar_name: "",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -50,7 +50,7 @@ const RegisterForm = ({ onSwitch }) => {
       onSubmit={handleSubmit}
       className="space-y-2"
     >
-      <div className="grid grid-cols-2 gap-4">
+      {/* <div className="grid grid-cols-2 gap-4">
         <div>
           <label
             htmlFor="user_first_name"
@@ -98,6 +98,31 @@ const RegisterForm = ({ onSwitch }) => {
             />
           </div>
         </div>
+      </div> */}
+
+      {/* business name */}
+      <div>
+        <label
+          htmlFor="bar_name"
+          className="block text-sm font-medium text-gray-300 mb-1"
+        >
+          Business Name
+        </label>
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <FiBriefcase className="h-5 w-5 text-gray-400" />
+          </div>
+          <input
+            id="bar_name"
+            name="bar_name"
+            type="text"
+            required
+            value={formData.bar_name}
+            onChange={handleChange}
+            className="input block w-full pl-10 pr-3 py-2"
+            placeholder="Bar or Business Name"
+          />
+        </div>
       </div>
 
       <div>
@@ -105,7 +130,7 @@ const RegisterForm = ({ onSwitch }) => {
           htmlFor="user_email"
           className="block text-sm font-medium text-gray-300 mb-1"
         >
-          Email
+          Email (Optional)
         </label>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -116,7 +141,6 @@ const RegisterForm = ({ onSwitch }) => {
             name="user_email"
             type="email"
             autoComplete="email"
-            required
             value={formData.user_email}
             onChange={handleChange}
             className="input block w-full pl-10 pr-3 py-2"
@@ -148,31 +172,7 @@ const RegisterForm = ({ onSwitch }) => {
           />
         </div>
       </div>
-
-      <div>
-        <label
-          htmlFor="bar_name"
-          className="block text-sm font-medium text-gray-300 mb-1"
-        >
-          Business Name
-        </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <FiBriefcase className="h-5 w-5 text-gray-400" />
-          </div>
-          <input
-            id="bar_name"
-            name="bar_name"
-            type="text"
-            required
-            value={formData.bar_name}
-            onChange={handleChange}
-            className="input block w-full pl-10 pr-3 py-2"
-            placeholder="Bar or Business Name"
-          />
-        </div>
-      </div>
-
+      {/* County form */}
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label
@@ -200,21 +200,21 @@ const RegisterForm = ({ onSwitch }) => {
 
         <div>
           <label
-            htmlFor="sub_county"
+            htmlFor="location"
             className="block text-sm font-medium text-gray-300 mb-1"
           >
-            Sub County
+            Location
           </label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FiMapPin className="h-5 w-5 text-gray-400" />
             </div>
             <input
-              id="sub_county"
-              name="sub_county"
+              id="location"
+              name="location"
               type="text"
               required
-              value={formData.sub_county}
+              value={formData.location}
               onChange={handleChange}
               className="input block w-full pl-10 pr-3 py-2"
               placeholder="Westlands"
