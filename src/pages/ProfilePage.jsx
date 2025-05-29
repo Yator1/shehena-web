@@ -41,10 +41,10 @@ const ProfilePage = () => {
                 <FiUser className="h-10 w-10 text-primary-400" />
               </div>
               <h2 className="text-xl font-semibold text-white">
-                {user?.user_first_name || "User"}
+                {user?.bar_name }
               </h2>
               <p className="text-gray-400 text-sm">
-                {user?.user_email || "user@example.com"}
+                {user?.user_email }
               </p>
             </div>
 
@@ -105,10 +105,10 @@ const ProfilePage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h3 className="text-sm font-medium text-gray-400 mb-1">
-                      Full Name
+                      Business Name
                     </h3>
                     <p className="text-white">
-                      {user?.user_first_name} {user?.user_last_name}
+                      {user?.bar_name}
                     </p>
                   </div>
 
@@ -117,7 +117,7 @@ const ProfilePage = () => {
                       Email
                     </h3>
                     <p className="text-white">
-                      {user?.user_email || "test@example.com"}
+                      {user?.user_email }
                     </p>
                   </div>
 
