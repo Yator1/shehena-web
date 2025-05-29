@@ -17,7 +17,7 @@ const LoginForm = ({ onSwitch }) => {
   const API_BASE_URL = import.meta.env.VITE_API_URL;
 
   const [formData, setFormData] = useState({
-    email: "",
+    identifier: "", // Changed from email to identifier
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -31,8 +31,8 @@ const LoginForm = ({ onSwitch }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = formData;
-    const success = await login(email, password);
+    const { identifier, password } = formData;
+    const success = await login(identifier, password); // Update login function call
     if (success) {
       navigate("/");
     }
@@ -50,25 +50,25 @@ const LoginForm = ({ onSwitch }) => {
       >
         <div>
           <label
-            htmlFor="email"
+            htmlFor="identifier"
             className="block text-sm font-medium text-gray-300 mb-1"
           >
-            Email
+            Email or Phone
           </label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FiMail className="h-5 w-5 text-gray-400" />
             </div>
             <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
+              id="identifier"
+              name="identifier"
+              type="text" // Changed from email to text
+              autoComplete="username"
               required
-              value={formData.email}
+              value={formData.identifier}
               onChange={handleChange}
               className="input block w-full pl-10 pr-3 py-2"
-              placeholder="your@email.com"
+              placeholder="Email or Phone Number"
             />
           </div>
         </div>
@@ -182,7 +182,8 @@ const LoginForm = ({ onSwitch }) => {
                   Reset Password
                 </h2>
                 <p className="text-sm text-gray-400 mb-4">
-                  Enter your email or phone number to receive a verification code.
+                  Enter your email or phone number to receive a verification
+                  code.
                 </p>
                 <input
                   type="text"
