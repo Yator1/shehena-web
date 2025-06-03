@@ -6,7 +6,14 @@ import { useCart } from '../contexts/CartContext'
 const CartPage = () => {
   const { cartItems, updateQuantity, removeFromCart, totalAmount, clearCart } = useCart()
   const shippingCost = 0;
-  
+
+  const handleQuantityInput = (id, e) => {
+    const value = parseInt(e.target.value) || 1;
+    if (value >= 1) {
+      updateQuantity(id, value);
+    }
+  };
+
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-12">
@@ -98,9 +105,13 @@ const CartPage = () => {
                     >
                       <FiMinus className="h-4 w-4" />
                     </button>
-                    <span className="w-8 text-center text-white">
-                      {item.quantity}
-                    </span>
+                    <input
+                      type="number"
+                      min="1"
+                      value={item.quantity}
+                      onChange={(e) => handleQuantityInput(item.id, e)}
+                      className="w-20 bg-transparent text-center text-white font-medium focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
                       className="p-1 text-gray-300 hover:text-accent-400 transition-colors"

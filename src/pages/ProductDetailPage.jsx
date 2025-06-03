@@ -52,6 +52,13 @@ const ProductDetailPage = () => {
     setQuantity(newQuantity)
   }
   
+  const handleQuantityInput = (e) => {
+    const value = parseInt(e.target.value) || 1;
+    if (value >= 1) {
+      setQuantity(value);
+    }
+  };
+  
   const handleAddToCart = () => {
     if (!product.variation_id || !product.product_id) {
       alert("Product variant not found.");
@@ -92,14 +99,14 @@ const ProductDetailPage = () => {
   return (
     <div className="space-y-12">
       {/* Back Button */}
-      <Link 
+      <Link
         to={`/category/${product.category_id}`}
         className="inline-flex items-center text-gray-300 hover:text-accent-400 transition-colors mb-4"
       >
         <FiArrowLeft className="mr-2" />
         Back
       </Link>
-      
+
       {/* Product Detail */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Product Image */}
@@ -112,7 +119,7 @@ const ProductDetailPage = () => {
             alt={product.name}
             className="w-full h-full object-cover aspect-square"
           />
-          
+
           <div className="absolute top-4 right-4">
             {product.inStock ? (
               <span className="bg-success/90 text-white px-3 py-1 rounded-full text-sm">
@@ -125,33 +132,29 @@ const ProductDetailPage = () => {
             )}
           </div>
         </div>
-        
+
         {/* Product Info */}
         <div className="space-y-6">
           <div>
-            <p className="text-lg text-accent-400 mb-2">
-              {product.brand}
-            </p>
+            <p className="text-lg text-accent-400 mb-2">{product.brand}</p>
             <h1 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
               {product.name}
             </h1>
-            <p className="text-xl text-white mb-2">
-              KES {product.price}
-            </p>
+            <p className="text-xl text-white mb-2">KES {product.price}</p>
             <div className="flex items-center space-x-4 text-gray-300">
               <span>{product.size}</span>
               <span>•</span>
               <span>{product.alcoholContent} ABV</span>
             </div>
           </div>
-          
+
           <div>
-            <h2 className="text-lg font-semibold text-white mb-2">Description</h2>
-            <p className="text-gray-300">
-              {product.description}
-            </p>
+            <h2 className="text-lg font-semibold text-white mb-2">
+              Description
+            </h2>
+            <p className="text-gray-300">{product.description}</p>
           </div>
-          
+
           {/* Add to Cart */}
           <div className="pt-4 border-t border-dark-600">
             <div className="flex flex-wrap items-center gap-4">
@@ -164,9 +167,14 @@ const ProductDetailPage = () => {
                 >
                   <FiMinus className="h-4 w-4" />
                 </button>
-                <span className="flex-grow text-center text-white font-medium">
-                  {quantity}
-                </span>
+                <input
+                  type="number"
+                  min="1"
+                  value={quantity}
+                  onChange={handleQuantityInput}
+                  className="flex-grow w-12 bg-transparent text-center text-white font-medium focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  aria-label="Quantity"
+                />
                 <button
                   onClick={() => handleQuantityChange(quantity + 1)}
                   className="p-2 text-gray-300 hover:text-accent-400 transition-colors"
@@ -175,34 +183,34 @@ const ProductDetailPage = () => {
                   <FiPlus className="h-4 w-4" />
                 </button>
               </div>
-              
+
               {/* Add to Cart Button */}
               <button
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
                 className={`flex-grow flex items-center justify-center py-3 px-6 rounded-md font-medium ${
                   product.inStock
-                    ? 'bg-accent-500 hover:bg-accent-600 text-dark-900'
-                    : 'bg-dark-600 text-gray-400 cursor-not-allowed'
+                    ? "bg-accent-500 hover:bg-accent-600 text-dark-900"
+                    : "bg-dark-600 text-gray-400 cursor-not-allowed"
                 }`}
               >
                 <FiShoppingCart className="h-5 w-5 mr-2" />
-                {isInCart ? 'Update Cart' : 'Add to Cart'}
+                {isInCart ? "Update Cart" : "Add to Cart"}
               </button>
-              
+
               {/* Buy Now Button */}
               <Link
                 to="/checkout"
                 className={`py-3 px-6 rounded-md font-medium border ${
                   product.inStock
-                    ? 'border-primary-500 text-primary-400 hover:bg-primary-500/10'
-                    : 'border-dark-600 text-gray-400 cursor-not-allowed'
+                    ? "border-primary-500 text-primary-400 hover:bg-primary-500/10"
+                    : "border-dark-600 text-gray-400 cursor-not-allowed"
                 }`}
                 onClick={(e) => {
                   if (!product.inStock) {
-                    e.preventDefault()
+                    e.preventDefault();
                   } else if (!isInCart) {
-                    handleAddToCart()
+                    handleAddToCart();
                   }
                 }}
               >
@@ -212,23 +220,23 @@ const ProductDetailPage = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Related Products */}
       {relatedProducts.length > 0 && (
         <div>
           <h2 className="text-2xl font-display font-bold text-black mb-6">
             You might also like
           </h2>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {relatedProducts.map(product => (
+            {relatedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default ProductDetailPage

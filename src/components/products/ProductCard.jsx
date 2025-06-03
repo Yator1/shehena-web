@@ -25,6 +25,14 @@ const ProductCard = ({ product }) => {
     updateQuantity(product.id, cartItem.quantity - 1)
   }
   
+  const handleQuantityInput = (e) => {
+    e.preventDefault()
+    const value = parseInt(e.target.value) || 1
+    if (value >= 1) {
+      updateQuantity(product.id, value)
+    }
+  }
+  
   return (
     <Link to={`/product/${product.id}`}>
       <motion.div
@@ -85,9 +93,14 @@ const ProductCard = ({ product }) => {
               >
                 <FiMinus className="h-5 w-5" />
               </button>
-              <span className="text-white font-medium">
-                {cartItem.quantity}
-              </span>
+              <input
+                type="number"
+                min="1"
+                value={cartItem.quantity}
+                onChange={handleQuantityInput}
+                onClick={(e) => e.preventDefault()}
+                className="w-12 bg-transparent text-center text-white font-medium focus:outline-none"
+              />
               <button
                 onClick={incrementQuantity}
                 className="p-1 text-gray-300 hover:text-accent-400 transition-colors"
