@@ -5,6 +5,7 @@ import { useCart } from '../contexts/CartContext'
 
 const CartPage = () => {
   const { cartItems, updateQuantity, removeFromCart, totalAmount, clearCart } = useCart()
+  const shippingCost = 0;
   
   if (cartItems.length === 0) {
     return (
@@ -176,7 +177,7 @@ const CartPage = () => {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-300">Shipping</span>
-                <span className="text-white">KES 250</span>
+                <span className="text-white">KES {shippingCost}</span>
               </div>
               {/* <div className="flex justify-between">
                 <span className="text-gray-300">Tax</span>
@@ -187,7 +188,7 @@ const CartPage = () => {
             <div className="flex justify-between items-center mb-6">
               <span className="text-white font-semibold">Total</span>
               <span className="text-xl text-accent-400 font-bold">
-                KES {totalAmount + 250 }
+                KES {totalAmount + shippingCost }
               </span>
             </div>
             
