@@ -59,7 +59,7 @@ export const productService = {
           image: product.product_image
             ? `${IMAGE_BASE_URL}/${product.product_image}`
             : fallbackImage,
-          inStock: data.data.category_info.category_status === "active",
+          inStock: firstVariant && parseInt(firstVariant.variant_quantity) > 0,
         };
       });
     } catch (error) {
